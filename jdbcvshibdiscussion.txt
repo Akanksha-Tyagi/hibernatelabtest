@@ -1,0 +1,17 @@
+major drawbacks of jdbc is 
+*******************************
+1.Complexity(due to code size)
+
+In the jdbc project , we needs to write a lot of code to map the object model’s data representation to the schema of the relational model.
+Hibernate maps the object model’s data to the schema of the database itself with the help of annotations.
+
+2.Portability
+
+jdbc is database dependent i.e. one needs to write different codes for different database.
+Whereas Hibernate is database independent and same code can work for many databases with minor changes.
+
+3.Creating associations
+
+Creating associations between relations is quite hard in JDBC.	
+Associations like one-to-one, one-to-many, many-to-one, and many-to-many can be acquired easily with the help of annotations.
+
