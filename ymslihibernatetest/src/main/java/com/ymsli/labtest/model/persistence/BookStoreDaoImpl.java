@@ -5,6 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import com.ymsli.labtest.exceptions.DataAccessException;
 import com.ymsli.labtest.model.dto.Book;
 
 public class BookStoreDaoImpl implements BookStoreDao {
@@ -15,7 +16,6 @@ public class BookStoreDaoImpl implements BookStoreDao {
 		this.sessionFactory = HibernateSessionFactory.getSessionFactory();
 	}
 
-	
 	@Override
 	public void persistObjectGraph(Book book) {
 		Session session = sessionFactory.openSession();
@@ -43,7 +43,9 @@ public class BookStoreDaoImpl implements BookStoreDao {
 			book = session.get(Book.class, isbn);
 			tx.commit();
 		} catch (HibernateException ex) {
+
 			tx.rollback();
+			throw new DataAccessException(ex.getCause().getMessage());
 
 		} finally {
 			if (session != null)
